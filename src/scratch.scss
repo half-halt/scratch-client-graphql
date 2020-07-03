@@ -1,0 +1,56 @@
+@import 'theme';
+
+.scratch__navbar {
+	background-color: rgba($primary-color, .05);
+	border: 1px solid rgba(black,.125);
+	border-radius: $border-radius;
+    display: flex;
+    justify-content: space-between;
+	align-items: center;
+}	
+
+.scratch__brand {
+	font-weight: bold;
+	font-size: 20px;
+	text-decoration: none;
+	margin: 5px 20px;
+	transition: all 250ms ease-in-out;
+
+	&:visited {
+		color: inhert;
+	}
+	&:hover {
+		filter: brightness(1.4);
+	}
+}
+
+.scratch__navbuttons {
+	display: flex;
+	align-items: stretch;
+	justify-content: flex-end;
+
+	a {	
+		outline: none;
+		border: none;
+		background: none;
+		display: flex;
+		align-content: center;
+		justify-content: center;
+		padding: 10px 20px;
+		transition: all 250ms ease-in-out;
+		margin-right: $border-radius;
+		text-decoration: none;
+		color: $accent-color;
+		font-family: $primary-font;
+
+		&:visited {
+			color: $accent-color;
+		}
+		
+		&:hover {
+			background-color: rgba(black,.10);
+			color: $primary-color;
+		}
+
+	}
+}

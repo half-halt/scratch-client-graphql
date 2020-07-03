@@ -1,17 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.scss";
+import { Scratch } from "./scratch";
+import { BrowserRouter } from 'react-router-dom';
+import './aws';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const Root: React.FC = () => {
+	return (
+		<BrowserRouter>
+			<Scratch />
+		</BrowserRouter>
+	);
+};
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.unstable_createRoot(document.querySelector("#root")!).render(<Root />);

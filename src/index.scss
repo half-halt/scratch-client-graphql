@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=PT+Serif:wght@400;700&display=swap');
+@import './theme.scss';
+
+:root {
+  font-family: $primary-font;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h5, h5, h6 {
+  font-family: $accent-font;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-size: 16px;
+  color: $primary-color;
+}
+
+.scratch-layout {
+  display: grid;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  grid-template-areas:
+    "header"
+    "content";
+  grid-template-rows: auto 1fr;
+  grid-gap: 10px;
+  margin: 15px 40px;
+
+  @media (max-width: 480px) {
+    grid-gap: 0px;
+    margin: 0;
+  }
+
+  nav {
+    grid-area: header;
+  }
+
+  main { 
+    grid-area: content;
+    overflow-y: auto;
+  }
+}
+
