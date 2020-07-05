@@ -1,0 +1,76 @@
+@import '../../sass/theme';
+
+.loader
+{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+@keyframes loader__spiner--spin
+{
+	0% {
+		transform:rotate(0deg); 
+		opacity: 1;
+	};
+
+	50% {
+		opacity: .125;
+		transform: rotate(180deg);
+	}
+
+	100% {
+		transform:rotate(360deg); 
+		opacity: 1;
+	};
+}	
+
+.loader__spinner
+{
+	animation: loader__spiner--spin 2500ms linear infinite;
+	@include with-theme()
+	{
+		color: themed(primary-color);
+	}
+
+	&--small
+	{
+		width: 1em;
+		height: 1em;
+	}
+
+	&--medium
+	{
+		width: 2.5em;
+		height: 2.5em;
+
+	}
+
+	&--large
+	{
+		width: 5em;
+		height: 5em;
+	}
+}
+
+.loader__text
+{
+	margin-top: .5rem;
+
+	&--small
+	{
+		font-size: .8rem;
+	}
+
+	&--large
+	{
+		font-size: 1.2rem;
+	}
+
+	@include with-theme()
+	{
+		font-weight: 300;
+		font-family: themed(accent-font);
+		color: themed(accent-color);
+	}
+}

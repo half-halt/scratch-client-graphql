@@ -1,51 +1,77 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=PT+Serif:wght@400;700&display=swap');
-@import './theme.scss';
+@import './sass/theme.scss';
 
 :root {
-  font-family: $primary-font;
+	@include with-theme() {
+		font-family: themed(primary-font);
+	}
 }
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 h1, h2, h3, h5, h5, h6 {
-  font-family: $accent-font;
+	@include with-theme() {
+		font-family: themed(accent-font);
+	}
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  font-size: 16px;
-  color: $primary-color;
+	margin: 0;
+	padding: 0;
+	@include with-theme() {
+		font-family: themed(primary-font);
+		font-size: themed(root-size);
+		color: themed(primary-color);
+		background-color: themed(background-color);
+	}
 }
 
 .scratch-layout {
-  display: grid;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  grid-template-areas:
-    "header"
-    "content";
-  grid-template-rows: auto 1fr;
-  grid-gap: 10px;
-  margin: 15px 40px;
+	display: grid;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	grid-template-areas:
+		"header"
+		"content";
+	grid-template-rows: auto 1fr;
+	grid-gap: 10px;
+	margin: 15px 40px;
 
-  @media (max-width: 480px) {
-    grid-gap: 0px;
-    margin: 0;
-  }
+	@media (max-width: 480px) {
+		grid-gap: 0px;
+		margin: 0;
+	}
 
-  nav {
-    grid-area: header;
-  }
+	nav {
+		grid-area: header;
+	}
 
-  main { 
-    grid-area: content;
-    overflow-y: auto;
-  }
+	main { 
+		grid-area: content;
+		overflow-y: auto;
+	}
+}
+
+.rootloader
+{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 100;
+
+	@include with-theme()
+	{
+		background-color: themed(background-color);
+		color: themed(accent-color);
+	}
 }
 

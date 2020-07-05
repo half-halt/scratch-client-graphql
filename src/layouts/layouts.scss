@@ -1,0 +1,16 @@
+@import "../sass/theme";
+
+.centeredlayout {
+	height: 100%;
+	display: flex;
+	align-content: center;
+	align-items: center;
+	justify-content: center;
+
+	@include small-screen {
+		height: auto;
+		margin-top: 80px;
+		align-content: flex-start;
+		align-items: flex-start;
+	}
+}

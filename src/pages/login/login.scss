@@ -1,0 +1,139 @@
+@import '../../sass/controls';
+
+.login__form
+{
+	display: grid;
+	grid-gap: 1rem;
+	grid-auto-flow: row;
+	width: 32ch;
+
+	@include with-theme()
+	{
+		xackground-color: rgba(themed(primary-color), 0.05);
+		dorder: 1px solid rgba(themed(primary-color), 0.125);
+		border-radius: themed(border-radius);
+
+		@include small-screen()
+		{
+			background-color: transparent;
+			border: none;
+			border-radius: 0;
+		}
+	}
+
+	@include small-screen()
+	{
+		padding:10px;
+		width:95%;
+	}
+
+	input 
+	{
+		@include input();
+	}
+
+	button 
+	{
+		@include button();
+	}
+}
+
+.login__header
+{
+	text-align: center;
+	font-size: 1.5em;
+	margin-bottom: 20px;
+	font-weight: 700;
+
+	@include with-theme()
+	{
+		font-family: themed(accent-font);
+	}
+}
+
+.login__buttons
+{
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: flex-start;
+}
+
+.login 
+{
+	&__error
+	{
+		padding: 20px;
+		
+		@include with-theme()
+		{
+			background-color: rgba(themed(error-color), 0.125);
+			color: themed(error-color);
+			border-radius: themed(border-radius);
+			border: 1px solid themed(error-color);
+		}
+	}
+
+	&__errorheader
+	{
+		font-weight: 600;
+		font-size: 1.125em;
+		margin-bottom: 1em;
+
+		@include with-theme()
+		{
+			font-family: themed(accent-font);
+		}
+	}
+
+	&__button--loading
+	{
+		position: relative;
+	}
+
+	&__loading
+	{
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+
+		@include with-theme()
+		{
+			color: themed(primary-color);
+		}
+
+		svg
+		{
+			// Note: This likely use calc() to determine the size.
+			width: 1.75em;
+			height: 1.75em;;
+		}
+
+		&--enter
+		{
+			opacity: 0;
+		}
+
+		&--enter-active
+		{
+			opacity: 1;
+			transition: opacity 250ms ease-out;
+		}
+		
+		&--exit
+		{
+			opacity: 1;
+		}
+
+		&--exit-active
+		{
+			opacity: 0;
+			transition: opacity 250ms ease-in;
+		}
+	}
+}

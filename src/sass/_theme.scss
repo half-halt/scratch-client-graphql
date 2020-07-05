@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=PT+Serif:wght@400;700&display=swap');
+//font-family: 'Open Sans', sans-serif;
+//font-family: 'PT Serif', serif;
+
+$themes:(
+	light:(
+		background-color: #eee,
+		primary-color: #333,
+		error-color: darkred,
+		accent-color: #999,
+		primary-font: unquote("'Open Sans', sans-serif"),
+		accent-font: unquote("'PT Serif', serif"),
+		border-radius: 6px,
+		root-size: 16px
+	),
+	dark:(
+		background-color: #333,
+		primary-color: #eee,
+		accent-color: #aaa,
+		error-color: orange,
+		primary-font: unquote("'Open Sans', sans-serif"),
+		accent-font: unquote("'PT Serif', serif"),
+		border-radius: 0px,
+		root-size: 16px
+	)
+);
+
+@mixin small-screen() {
+	@media (max-width: 480px) {
+		@content;
+	}
+}
+
+@mixin with-theme() {
+	@each $theme, $map in $themes {
+		.theme-#{$theme} & {
+			$theme-map: () !global;
+			$theme-name: $theme !global;
+			@each $property, $value in $map {
+				$theme-map: map-merge($theme-map, ('#{$property}': $value)) !global;
+			}
+			@content;
+			$theme-map: null !global;
+			$theme-name: null !global;
+		}
+
+	}
+}
+
+@function themed($key) {
+	@if not $theme-map {
+		@error "ERROR: there is no theme map, is this inside of a 'with-theme'?"
+	}
+	@if not map-has-key($theme-map, $key) {
+		@error "ERROR: there is no theme property: '#{$key}'";
+	}
+
+	@return map-get($theme-map, $key);
+}
+
+@mixin if-theme($name) {
+	@if not $theme-name {
+		@error "ERROR; there is no theme name, is this inside of a 'with-theme'?";
+	}
+
+	@if $name == $theme-name {
+		@content;
+	}
+}

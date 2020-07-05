@@ -1,0 +1,193 @@
+@import 'theme';
+
+// move to _disabled.css
+@mixin disabled()
+{
+	border-color: rgba(themed(accent-color), 0.25);
+	color: rgba(themed(accent-color), 0.25);
+	background-color: rgba(themed(primary-color), 0.01);
+	pointer-events: none;
+}
+
+@mixin input()
+{
+	padding: 6px 12px;
+	outline: none;
+	font-size: 1rem;
+
+	@include with-theme()
+	{
+		font-family: themed(primary-font);
+		border-radius: themed(border-radius);
+		border: 1px solid rgba(themed(primary-color), 0.125);
+		color: themed(primary-color);
+		background-color: themed(background-color);
+		transition: all 250ms ease-in-out;
+
+		&:hover
+		{
+			background-color: mix(themed(accent-color), themed(background-color), 10%);
+		}
+
+		&:focus-within
+		{
+			box-shadow: 0 0 1px 1px rgba(themed(primary-color), 0.5);
+			background-color: themed(background-color);
+		}
+
+		&:invalid
+		{
+			border-color: themed(error-color);
+			border-width: 2px;
+
+			& > &:focus-within
+			{
+				box-shadow: 0, 0, 1px 1px rgba(themed(error-color), 0.5);
+			}
+
+		}
+
+		&:disabled
+		{
+			@include disabled();
+		}
+	}
+}
+
+.input
+{
+	padding: 6px 12px;
+	outline: none;
+	font-size: 1rem;
+	
+	@include with-theme()
+	{
+		font-family: themed(primary-font);
+		border-radius: themed(border-radius);
+		border: 1px solid rgba(themed(primary-color), 0.125);
+		color: themed(primary-color);
+		background-color: themed(background-color);
+		transition: all 250ms ease-in-out;
+	
+		&:hover
+		{
+			@include if-theme(light)
+			{
+				background-color: mix(black, themed(background-color), 5%);
+			}
+
+			@include if-theme(dark)
+			{
+				background-color: mix(white, themed(background-color), 5%);
+			}
+		}
+	
+		&:focus-within
+		{
+			box-shadow: 0 0 1px 1px rgba(themed(primary-color), 0.5);
+			background-color: themed(background-color);
+		}
+	
+		&:invalid
+		{
+			border-color: themed(error-color);
+			border-width: 2px;
+	
+			& > &:focus-within
+			{
+				box-shadow: 0, 0, 1px 1px rgba(themed(error-color), 0.5);
+			}
+	
+		}
+	
+		&:disabled
+		{
+			@include disabled();
+		}
+	}	
+}
+
+
+@mixin button()
+{
+	outline: none;
+	border: none;
+	background: none;
+	padding: 8px 16px;
+	cursor: pointer;
+	font-size: 1rem;
+
+	@include with-theme()
+	{
+		font-family: themed(accent-font);
+		border: 1px solid themed(accent-color);
+		color: themed(accent-color);
+		border-radius: themed(border-radius);
+		background-color: themed(background-color);
+		transition: all 250ms ease-in-out;
+
+		&:hover
+		{
+			background-color: rgba(themed(primary-color), 0.125);
+			color: themed(primary-color);
+			border-color: themed(primary-color);
+		}
+
+		&:disabled
+		{
+			@include disabled();
+		}
+	}
+}
+
+// move to _button.scss
+.button
+{
+	outline: none;
+	border: none;
+	background: none;
+	padding: 8px 16px;
+	cursor: pointer;
+	font-size: 1rem;
+	transition: all 250ms ease-in-out;
+	
+	@include with-theme()
+	{
+		font-family: themed(accent-font);
+	}
+
+	&--outlined
+	{
+		border: 1px solid transparent;
+		@include with-theme()
+		{
+			border-radius: themed(border-radius);
+		}
+	}
+
+	&--primary
+	{
+		@include with-theme()
+		{
+			border-color: themed(accent-color);
+			color: themed(accent-color);
+			background-color: themed(background-color);
+		
+			&:hover
+			{
+				background-color: rgba(themed(primary-color), 0.125);
+				color: themed(primary-color);
+				border-color: themed(primary-color);
+			}
+		}
+	
+	}
+
+	&:disabled
+	{
+		@include with-theme()
+		{
+			@include disabled();
+		}
+	}
+}

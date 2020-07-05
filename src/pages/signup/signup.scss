@@ -1,0 +1,23 @@
+@import '../../sass/controls';
+
+.signup
+{
+	&__form
+	{
+		display: grid;
+		grid-gap: 1rem;
+		grid-auto-flow: row;
+		width: 32ch;
+		
+		@include small-screen()
+		{
+			padding:10px;
+			width:95%;
+		}		
+	}
+
+	&__button
+	{
+		margin-top: 1em;
+	}
+}

@@ -1,0 +1,31 @@
+@import '../../sass/theme';
+
+.setTheme__button 
+{
+	display: flex;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+	border: none;
+	background: none;
+	outline: none;
+	cursor: pointer;
+	padding: 4px 6px;
+
+	svg 
+	{
+		width: 1.2em;
+		height: 1.2em;
+	}
+
+	@include with-theme()
+	{
+		color: themed(accent-color);
+
+		&:hover
+		{
+			color: themed(primary-color);
+			background-color: rgba(themed(primary-color), 0.125);
+		}
+	}
+}

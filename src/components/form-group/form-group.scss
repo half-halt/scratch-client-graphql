@@ -1,0 +1,54 @@
+@import '../../sass/theme';
+
+.formgroup
+{
+	display: grid;
+	grid-gap: .5rem;
+	grid-template-rows: auto auto auto;
+	grid-template-areas:
+		"label"
+		"children"
+		"text";
+}
+
+.formgroup--row
+{
+	grid-template-rows: auto auto;
+	grid-template-columns: auto 1fr;
+	grid-template-areas:
+		"label children"
+		"label text";
+}
+
+.formgroup__label
+{
+	font-weight: 600;
+	@include with-theme() 
+	{
+		color: themed(primary-color);
+	}
+}
+
+.formgroup__baseText
+{
+	font-size: .8rem;
+	padding:0px 1ch;
+}
+
+.formgroup__help
+{
+	@extend .formgroup__baseText;
+	@include with-theme() 
+	{
+		color: themed(accent-color);
+	}
+}
+
+.formgroup__error
+{
+	@extend .formgroup__baseText;
+	@include with-theme()
+	{
+		color: themed(error-color);
+	}
+}

@@ -1,35 +1,77 @@
-@import 'theme';
+@import 'sass/theme';
 
-.scratch__navbar {
-	background-color: rgba($primary-color, .05);
-	border: 1px solid rgba(black,.125);
-	border-radius: $border-radius;
+.scratch__navbar 
+{
     display: flex;
     justify-content: space-between;
 	align-items: center;
+
+	@include with-theme() 
+	{
+		background-color: rgba(themed(accent-color), 0.125);
+		border: 1px solid rgba(themed(primary-color), .125);
+		border-radius: themed(border-radius);
+		padding: 0px themed(border-radius);
+
+		@include small-screen() 
+		{
+			border-bottom: 1px solid rgba(themed(primary-color), .125);
+		}
+	}
+
+	@include small-screen() 
+	{
+		border-radius: 0px;
+		padding: 0;
+	}
+
 }	
 
-.scratch__brand {
+.scratch__brand 
+{
 	font-weight: bold;
 	font-size: 20px;
 	text-decoration: none;
 	margin: 5px 20px;
 	transition: all 250ms ease-in-out;
 
-	&:visited {
-		color: inhert;
+	&:visited 
+	{
+		font-weight: bold;
 	}
-	&:hover {
-		filter: brightness(1.4);
+
+	@include with-theme() 
+	{
+		color: themed(primary-color);
+		font-family: themed(accent-font);
+
+
+		@include if-theme(light) 
+		{
+			&:hover 
+			{
+				filter: brightness(1.8);
+			}		
+		}
+
+		@include if-theme(dark) 
+		{
+			&:hover 
+			{
+				filter: brightness(.8);
+			}		
+		}
 	}
 }
 
-.scratch__navbuttons {
+.scratch__navbuttons 
+{
 	display: flex;
 	align-items: stretch;
 	justify-content: flex-end;
 
-	a {	
+	a 
+	{	
 		outline: none;
 		border: none;
 		background: none;
@@ -38,19 +80,29 @@
 		justify-content: center;
 		padding: 10px 20px;
 		transition: all 250ms ease-in-out;
-		margin-right: $border-radius;
 		text-decoration: none;
-		color: $accent-color;
-		font-family: $primary-font;
-
-		&:visited {
-			color: $accent-color;
-		}
 		
-		&:hover {
-			background-color: rgba(black,.10);
-			color: $primary-color;
+		@include with-theme() 
+		{
+			color: themed(accent-color);
+			font-family: themed(primary-font);
+
+			&:visited 
+			{
+				color: themed(accent-color);
+			}			
+
+			&:hover 
+			{
+				background-color: rgba(themed(primary-color), .10);
+				color: themed(primary-color);
+			}
 		}
 
+		@include small-screen() 
+		{
+			padding: 5px 10px;
+			margin-right: 0;
+		}
 	}
 }
