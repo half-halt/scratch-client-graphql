@@ -74,3 +74,44 @@
 		color: themed(accent-color);
 	}
 }
+
+.loadingButton
+{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	pointer-events: none;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	color: inherit;
+
+	svg
+	{
+		padding: 4px;
+	}
+
+	&--enter
+	{
+		opacity: 0;
+	}
+
+	&--enter-active
+	{
+		opacity: 1;
+		transition: opacity 250ms ease-out;
+	}
+	
+	&--exit
+	{
+		opacity: 1;
+	}
+
+	&--exit-active
+	{
+		opacity: 0;
+		transition: opacity 250ms ease-in;
+	}
+}

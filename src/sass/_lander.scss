@@ -1,0 +1,49 @@
+@import 'theme';
+
+.lander__block 
+{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+
+	h1 
+	{
+		@include with-theme() 
+		{
+			font-family: themed(primary-font);
+		}
+		font-weight: 600;
+		text-align: center;
+		font-size: 2.5rem;		
+	}
+
+	p 
+	{
+		@include with-theme() 
+		{
+			color: themed(accent-color);
+		}
+		text-align: center;
+		margin-top: 1em;
+	}
+
+	&--inverse
+	{
+		h1 
+		{
+			@include with-theme() 
+			{
+				color: themed(accent-color);
+			}
+		}
+
+		p 
+		{
+			@include with-theme() 
+			{
+				color: themed(primary-color);
+			}
+		}
+	}
+}

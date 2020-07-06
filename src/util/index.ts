@@ -1,0 +1,1 @@
+export  { ensureTransitionTime } from './ensure-transition';

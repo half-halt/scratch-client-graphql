@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import './loader.scss';
 import clsx from 'clsx';
 import { ReactComponent as Spinner } from "../../assets/spinner-duotone.svg";
@@ -10,15 +10,22 @@ export enum LoaderSize
 	Large,
 }
 
+export type CustomSize = {
+	width: CSSProperties['width'],
+	height: CSSProperties['height']
+}
+
 interface LoaderProps
 {
 	size?: LoaderSize;
 	text?: string;
+	customSize?: CustomSize;
 }
 
 export const Loader: React.FC<LoaderProps> = ({
 	size,
-	text
+	text,
+	customSize
 }) => {
 	const loaderClass = clsx({
 			'loader__spinner': true,
@@ -32,11 +39,11 @@ export const Loader: React.FC<LoaderProps> = ({
 		'loader__text--small': (size === LoaderSize.Small),
 		'loader__text--medium': (size === LoaderSize.Medium),
 		'loader__text--large': (size === LoaderSize.Large)
-	});
+	})
 
 	return (
 		<div className='loader'>
-			<Spinner className={loaderClass}/>
+			<Spinner style={customSize ? customSize : {}} className={loaderClass}/>
 			{(typeof(text) === 'string') && (text.length  !== 0) &&
 				<p className={textClass}>{text}</p>
 			}

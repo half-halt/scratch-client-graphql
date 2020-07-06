@@ -150,18 +150,41 @@
 	cursor: pointer;
 	font-size: 1rem;
 	transition: all 250ms ease-in-out;
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
 	
 	@include with-theme()
 	{
 		font-family: themed(accent-font);
+		font-size: 1.2em;
 	}
 
 	&--outlined
 	{
 		border: 1px solid transparent;
+		background: transparent;
 		@include with-theme()
 		{
 			border-radius: themed(border-radius);
+		}
+	}
+
+	&--accent
+	{
+		@include with-theme()
+		{
+			border-color: rgba(themed(accent-color), .75);
+			color: rgba(themed(accent-color), .75);
+			background-color: themed(background-color);
+		
+			&:hover
+			{
+				background-color: mix(themed(accent-color), themed(background-color), 15%);
+				color: themed(primary-color);
+				border-color: themed(primary-color);
+			}
 		}
 	}
 
@@ -169,19 +192,35 @@
 	{
 		@include with-theme()
 		{
-			border-color: themed(accent-color);
-			color: themed(accent-color);
+			border-color: rgba(themed(primary-color), .75);
+			color: rgba(themed(primary-color), .75);
 			background-color: themed(background-color);
 		
 			&:hover
 			{
-				background-color: rgba(themed(primary-color), 0.125);
+				background-color: mix(themed(primary-color), themed(background-color), 15%);
 				color: themed(primary-color);
 				border-color: themed(primary-color);
 			}
-		}
-	
-	}
+		}	
+	}	
+
+	&--error
+	{
+		@include with-theme()
+		{
+			border-color: themed(error-color);
+			color: themed(error-color);
+			background-color: themed(background-color);
+		
+			&:hover
+			{
+				background-color: mix(themed(error-color), themed(background-color), 15%);
+				color: themed(error-color);
+				border-color: themed(error-color);
+			}
+		}	
+	}		
 
 	&:disabled
 	{

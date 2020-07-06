@@ -1,14 +1,14 @@
 import React, { useLayoutEffect, useCallback, useState } from 'react';
 import { CenterLayout } from '../../layouts';
-import { FormGroup, LoaderSize, Loader } from '../../components';
+import { FormGroup, LoadingButton } from '../../components';
 import { Auth } from 'aws-amplify';
 import * as yup from 'yup';
 import { useForm, get } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers';
-import { Redirect } from 'react-router-dom';
-import { CSSTransition } from 'react-transition-group';
+import { useNavigate } from 'react-router-dom';
 import { useControlValidity, useUserToken } from '../../hooks'; // '~/hooks'
 import './login.scss';
+import { ensureTransitionTime } from '../../util';
 
 enum LoginState
 {
@@ -29,6 +29,8 @@ const loginSchema = yup.object().shape({
 
 export const Login: React.FC = () => 
 {
+	const navigate = useNavigate();
+
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const [ _, setToken ] = useUserToken();
 	const [ state, setState ] = useState(LoginState.None);
@@ -55,6 +57,8 @@ export const Login: React.FC = () =>
 	// want unnoecessary copies of this to be made.
 	//
 	const login = useCallback(async(data: any) => {
+		const startTime = Date.now();
+
 		try
 		{
 			setState(LoginState.Loading);
@@ -63,26 +67,20 @@ export const Login: React.FC = () =>
 			// We logged in succesfully, howeever, it it was very fast we
 			// don't want flicker, so we're going to place a 400ms forced delay
 			// so the ruser can see animation.
-			setTimeout(() => {
+			ensureTransitionTime(startTime, () => {
 				setToken(signinResult.signInUserSession.accessToken.jwtToken);
 				setState(LoginState.Complete);
-			}, 400);
+				navigate('/');
+			});
 		}
 		catch (error)
 		{
 			console.error(error);
 
 			// See the comment above about the setTimeout.
-			setTimeout(() => setState(LoginState.Error), 400);
+			ensureTransitionTime(startTime, () => setState(LoginState.Error));
 		}
-	}, [setState, setToken]);
-
-	if (state === LoginState.Complete)
-	{
-		return (
-			<Redirect to="/"/>
-		)
-	}
+	}, [setState, setToken, navigate]);
 
 	const loading = (state === LoginState.Loading);
 	return (
@@ -90,7 +88,7 @@ export const Login: React.FC = () =>
 			<form ref={formRef} className='login__form'>
 				{state === LoginState.Error && 
 					<div className='login__error'>
-						<h6 className='login__errorheader'>Authentication Failed</h6>
+						<h3 className='login__errorheader'>Authentication Failed</h3>
 						Please verify your credentials and retry the login. 
 					</div>
 				}
@@ -98,28 +96,22 @@ export const Login: React.FC = () =>
 					label="Email" 
 					id="email" 
 					errorText={get(errors, 'email.message')}>
-					<input autoFocus ref={register} type='text' disabled={loading}/>
+					<input autoFocus ref={register} type='text' disabled={loading} className='input'/>
 				</FormGroup>
 				<FormGroup 
 					errorText={get(errors, 'password.message')}
 					label="Password" 
 					id="password">
-					<input ref={register} type='password' disabled={loading}/>
+					<input ref={register} type='password' disabled={loading} className='input'/>
 				</FormGroup>
-				<div className='login__buttons'>
-					<button 
-						className='login__button--loading'
-						type='button' 
-						onClick={handleSubmit(login)} 
-						disabled={loading}>
-						Login
-						<CSSTransition in={loading} mountOnEnter unmountOnExit timeout={250} classNames="login__loading--">
-							<div className='login__loading'>
-								<Loader size={LoaderSize.Small}/>
-							</div>
-						</CSSTransition>
-					</button>
-				</div>
+				<LoadingButton 
+					className='button button--outlined button--primary login__button'
+					type='button' 
+					loading={loading}
+					onClick={handleSubmit(login)} 
+					disabled={loading}>
+					Login
+				</LoadingButton>
 			</form>
 		</CenterLayout>
 	);

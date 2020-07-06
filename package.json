@@ -6,11 +6,13 @@
     "@hookform/resolvers": "^0.0.5",
     "aws-amplify": "^3.0.18",
     "clsx": "^1.1.1",
+    "history": "^5.0.0",
     "lodash": "^4.17.15",
     "react": "^0.0.0-experimental-7f28234f8",
     "react-dom": "^0.0.0-experimental-7f28234f8",
     "react-hook-form": "^6.0.1",
-    "react-router-dom": "^5.2.0",
+    "react-router": "^6.0.0-beta.0",
+    "react-router-dom": "^6.0.0-beta.0",
     "react-scripts": "3.4.1",
     "react-transition-group": "^4.4.1",
     "recoil": "^0.0.10",
@@ -23,7 +25,16 @@
     "test": "react-scripts test"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "react-app",
+    "parser": "@typescript-eslint/parser",
+    "parserOptions":{
+      "project": "./tsconfig.json"
+    },
+    "rules": {
+      "no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-unused-vars-experimental": "warn"
+    }
   },
   "browserslist": {
     "production": [
@@ -49,6 +60,7 @@
     "@types/react-transition-group": "^4.4.0",
     "@types/yup": "^0.29.3",
     "graphql-tag": "^2.10.3",
-    "node-sass": "^4.14.1"
+    "node-sass": "^4.14.1",
+    "ts-jest": "^26.1.1"
   }
 }

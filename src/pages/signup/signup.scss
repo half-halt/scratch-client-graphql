@@ -1,23 +1,26 @@
 @import '../../sass/controls';
-
+@import '../login/login.scss';
+@import '../../sass//lander';
 .signup
 {
 	&__form
 	{
-		display: grid;
-		grid-gap: 1rem;
-		grid-auto-flow: row;
-		width: 32ch;
-		
-		@include small-screen()
-		{
-			padding:10px;
-			width:95%;
-		}		
+		@extend .login__form;
 	}
 
 	&__button
 	{
-		margin-top: 1em;
+		@extend .login__button;
+	}
+
+	&__error
+	{
+		@extend .login__error;
+	}
+
+	&__startButton
+	{
+		margin-top: 2em;
+		width: 30ch;
 	}
 }
