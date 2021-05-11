@@ -7,7 +7,7 @@
     "aws-amplify": "^3.0.18",
     "clsx": "^1.1.1",
     "history": "^5.0.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "react": "^0.0.0-experimental-7f28234f8",
     "react-dom": "^0.0.0-experimental-7f28234f8",
     "react-hook-form": "^6.0.1",
